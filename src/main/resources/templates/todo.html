@@ -5,27 +5,26 @@
     <title>ToDoList</title>
 </head>
 <body>
-<form>
+<form th:action="@{/create}" method="post">
     <h1>TODO List</h1>
     <label for="todo-desc">새 할일: <input type="text" id="todo-desc"></label>
     <input type="submit" value="생성">
 </form>
-<div>
-    <hr>
-    TODO 내용
-    <form>
+
+<form>
+    <div th:each="todo: ${todoList}">
+        <hr> <span>[[${todo.id}]] </span> <p>[[${todo.content}]]</p>
         <input type="submit" value="완료">
         <input type="submit" value="삭제">
-    </form>
-</div>
-<!-- 완료 된 할일 -->
-<div>
-    <hr>
-    TODO 내용 2 (완료됨)
-    <form>
+    </div>
+    <!-- 완료 된 할 일 -->
+    <div>
+        <hr> TODO 내용 2 (완료됨) <br>
         <input type="submit" value="취소">
         <input type="submit" value="삭제">
-    </form>
-</div>
+    </div>
+</form>
+
+
 </body>
 </html>
