@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class TodoController {
 
@@ -13,24 +15,23 @@ public class TodoController {
         this.todoService = todoService;
     }
 
-    @GetMapping(value = "/todo")
+    @RequestMapping("/todo")
     public String todo(Model model) {
-        model.addAttribute("todoList", todoService.readAll());
+        List<TodoDto> todoDtoList = this.todoService.readAll();
+        model.addAttribute("todoList", todoDtoList);
         return "todo";
     }
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String home() {
         return "redirect:/todo";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/todo/create")
     public String create(
             @RequestParam("todo-desc") String content) {
         // 새로운 TODO를 생성하는 컨트롤러 메소드
-        System.out.println(content);
-        TodoDto newTodo = todoService.createToDo(content);
-        System.out.println(newTodo.toString());
+        todoService.createToDo(content);
         return "redirect:/todo";
     }
 
