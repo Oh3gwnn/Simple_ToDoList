@@ -35,13 +35,18 @@ public class TodoController {
         return "redirect:/todo";
     }
 
-    public String update() {
+    @PostMapping("/todo/{id}/update")
+    public String update(@PathVariable("id") Long id) {
         // TODO의 done 상태를 변경하는 메소드
-        throw new RuntimeException("TODO");
+        TodoDto todoDto = todoService.updateToDo(id);
+        System.out.println(todoDto.toString());
+        return "redirect:/todo";
     }
 
-    public String delete() {
+    @PostMapping("/todo/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
         // TODO를 삭제하는 메소드
-        throw new RuntimeException("TODO");
+        todoService.deleteToDo(id);
+        return "redirect:/todo";
     }
 }

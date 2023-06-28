@@ -12,17 +12,30 @@
 </form>
 
 <form>
-    <hr th:unless="${todoList.isEmpty()}">
+    <hr> <b style="font-size: 18px">ToDo</b>
     <div th:each="todo: ${todoList}">
-        <span>[[${todo.id}]]. </span> <span>[[${todo.content}]]</span> <br>
-        <input type="submit" value="완료">
-        <input type="submit" value="삭제">
+        <div th:if="${todo.done} == false">
+            <span>[[${todo.content}]]</span> <br>
+            <div>
+                <form th:action="@{/todo/{id}/update (id=${todo.id})}" method="post" style="display:inline-block;">
+                    <input type="submit" value="완료"></form>
+                <form th:action="@{/todo/{id}/delete (id=${todo.id})}" method="post" style="display:inline-block;">
+                    <input type="submit" value="삭제"></form>
+            </div>
+        </div>
     </div>
     <!-- 완료 된 할 일 -->
-    <div>
-        <hr> TODO 내용 2 (완료됨) <br>
-        <input type="submit" value="취소">
-        <input type="submit" value="삭제">
+    <hr> <b style="font-size: 18px">Done</b>
+    <div th:each="todo: ${todoList}">
+        <div th:if="${todo.done} == true">
+            <span>[[${todo.content}]]</span> <br>
+            <div>
+                <form th:action="@{/todo/{id}/update (id=${todo.id})}" method="post" style="display:inline-block;">
+                    <input type="submit" value="취소"></form>
+                <form th:action="@{/todo/{id}/delete (id=${todo.id})}" method="post" style="display:inline-block;">
+                    <input type="submit" value="삭제"></form>
+            </div>
+        </div>
     </div>
 </form>
 
