@@ -39,7 +39,6 @@ public class TodoController {
     public String update(@PathVariable("id") Long id) {
         // TODO의 done 상태를 변경하는 메소드
         TodoDto todoDto = todoService.updateToDo(id);
-        System.out.println(todoDto.toString());
         return "redirect:/todo";
     }
 
