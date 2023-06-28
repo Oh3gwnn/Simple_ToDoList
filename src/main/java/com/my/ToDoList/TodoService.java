@@ -27,7 +27,7 @@ public class TodoService {
         return todoList
                 .stream()
                 .filter(todoDto -> todoDto.getId().equals(id))
-                .peek(todoDto -> todoDto.setDone(true))
+                .peek(todoDto -> todoDto.setDone(!todoDto.getDone()))
                 .findFirst()
                 .orElse(null);
     }
