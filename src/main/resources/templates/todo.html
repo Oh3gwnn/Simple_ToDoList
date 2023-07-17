@@ -13,8 +13,8 @@
 
 <form>
     <hr> <b style="font-size: 18px">ToDo</b>
-    <div th:each="todo: ${todoList}">
-        <div th:if="${todo.done} == false">
+    <div th:each="todo, stat: ${todoList}">
+        <div th:if="${stat.index} != 0 and ${todo.done} == false">
             <span>[[${todo.content}]]</span> <br>
             <div>
                 <form th:action="@{/todo/{id}/update (id=${todo.id})}" method="post" style="display:inline-block;">
@@ -26,8 +26,8 @@
     </div>
     <!-- 완료 된 할 일 -->
     <hr> <b style="font-size: 18px">Done</b>
-    <div th:each="todo: ${todoList}">
-        <div th:if="${todo.done} == true">
+    <div th:each="todo, stat: ${todoList}">
+        <div th:if="${stat.index} != 0 and ${todo.done} == true">
             <span>[[${todo.content}]]</span> <br>
             <div>
                 <form th:action="@{/todo/{id}/update (id=${todo.id})}" method="post" style="display:inline-block;">
@@ -38,7 +38,6 @@
         </div>
     </div>
 </form>
-
 
 </body>
 </html>

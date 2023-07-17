@@ -38,7 +38,7 @@ public class TodoController {
     @PostMapping("/todo/{id}/update")
     public String update(@PathVariable("id") Long id) {
         // TODO의 done 상태를 변경하는 메소드
-        TodoDto todoDto = todoService.updateToDo(id);
+        todoService.updateToDo(id);
         return "redirect:/todo";
     }
 
